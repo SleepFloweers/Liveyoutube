@@ -20,14 +20,13 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="Nocturn Noir - Live Streaming">
         <meta property="og:description" content="Dashboard live streaming komunitas Nocturn Noir. Cek siapa yang sedang live sekarang!">
-        <meta property="og:image" content="https://domainkamu.com/preview.jpg">
-        <meta property="og:url" content="https://domainkamu.com">
+        <meta property="og:image" content="https://nn-streaming.vercel.app/preview.jpg">
+        <meta property="og:url" content="https://nn-streaming.vercel.app">
         <meta property="og:site_name" content="Nocturn Noir">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Nocturn Noir - Live Streaming">
         <meta name="twitter:description" content="Cek live streaming aktif komunitas Nocturn Noir secara real-time.">
-        <meta name="twitter:image" content="https://domainkamu.com/preview.jpg">
-        <link rel="icon" type="image/png" href="favicon.png">
+        <meta name="twitter:image" content="https://nn-streaming.vercel.app/preview.jpg">
         <style>
         body{
             background:#0a0a0f;
@@ -167,11 +166,10 @@
     top:10px;
     left:10px;
     background:#e10600;
-    padding:6px 12px;
+    padding:6px;
     border-radius:20px;
     display:flex;
     align-items:center;
-    gap:8px;
     z-index:10;
 }
 .live-channel-name{
@@ -431,7 +429,7 @@
             <div class="grid-control">
                 <button class="btn btn-outline-light btn-sm ms-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#streamerModal">
+                        data-bs-target="#streamerModal" styt>
                     <i class="fa fa-list"></i> List Streamer
                 </button>
                 <button onclick="setGridMode(2)">2</button>
@@ -440,7 +438,9 @@
                 <button onclick="setGridMode(9)">9</button>
                 <button onclick="setGridMode(16)">16</button>
             </div>
-            <div class="live-grid" id="liveContainer"></div>
+            <div style="padding:30px;">
+                <div class="live-grid" id="liveContainer"></div>
+            </div>
         </div>
         <div class="modal fade" id="addModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -764,11 +764,6 @@ async function checkChannelLive(channel, card) {
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <div class="live-badge">
-                        <span class="live-dot"></span>
-                        <span class="live-channel-name">${name}</span>
-                    </div>
-
 
                     <button class="refresh-btn">⟳</button>
                     <button class="hide-btn">✖</button>
