@@ -162,17 +162,47 @@
         .main-content{
             flex:1;
         }
-        .live-badge{
-            position:absolute;
-            top:8px;
-            left:8px;
-            background:red;
-            color:#fff;
-            font-size:12px;
-            padding:4px 8px;
-            border-radius:4px;
-            font-weight:bold;
-        }
+.live-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:#e10600;
+    padding:6px 12px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    z-index:10;
+}
+.live-channel-name{
+    color:#ffffff;
+    font-size:13px;
+    font-weight:600;
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.live-dot{
+    width:10px;
+    height:10px;
+    background:#ffffff;
+    border-radius:50%;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(255,255,255,0.7);}
+    70%{ box-shadow:0 0 0 6px rgba(255,255,255,0);}
+    100%{ box-shadow:0 0 0 0 rgba(255,255,255,0);}
+}
+.live-name{
+    color:#fff;
+    max-width:120px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
         .offline-card{
             background:#111;
             padding:20px;
@@ -180,11 +210,8 @@
             border:1px solid #222;
             border-radius:8px;
         }
-        .live-card{
+.live-card{
     position:relative;
-    width:100%;
-    background:#000;
-    border-radius:12px;
     overflow:hidden;
 }
 .video-wrapper{
@@ -737,9 +764,11 @@ async function checkChannelLive(channel, card) {
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <div class="live-badge">LIVE</div>
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        <span class="live-channel-name">${name}</span>
+                    </div>
 
-                    <div class="channel-name">${channel.name}</div>
 
                     <button class="refresh-btn">⟳</button>
                     <button class="hide-btn">✖</button>
@@ -747,7 +776,7 @@ async function checkChannelLive(channel, card) {
                     <a href="${status.channel}"
                        target="_blank"
                        class="visit-btn">
-                       Visit
+                       ${channel.name}
                     </a>
                 </div>
             `;
@@ -758,7 +787,6 @@ async function checkChannelLive(channel, card) {
 
             card.innerHTML = `
                 <div class="offline-card">
-                    <div class="channel-name">${channel.name}</div>
                     <div class="offline-text">
                         Stream Offline
                     </div>
@@ -767,7 +795,7 @@ async function checkChannelLive(channel, card) {
                     <a href="${status.channel}"
                     target="_blank"
                     class="visit-btn">
-                    Visit
+                    ${channel.name}
                     </a>
                 </div>
             `;
