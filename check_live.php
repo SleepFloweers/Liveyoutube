@@ -16,6 +16,10 @@ function checkLive($channelUrl) {
     if (!$html) return ["live" => false];
 
     // CEK isLive:true
+    if (strpos($html, '"scheduledStartTime"') !== false) {
+
+        return ["live" => false];
+    }else
     if (strpos($html, '"isLive":true') !== false) {
 
         if (preg_match('/"videoId":"([^"]+)"/', $html, $matches)) {
