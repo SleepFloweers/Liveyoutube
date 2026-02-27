@@ -154,7 +154,30 @@
     border-radius:6px;
     cursor:pointer;
 }
+.refresh-btn,
+.hide-btn{
+    position:absolute;
+    top:10px;
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:8px;
+    background:rgba(0,0,0,0.7);
+    color:#fff;
+    cursor:pointer;
+    z-index:9999; /* ini penting */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
+.refresh-btn{
+    margin-right:45px;
+}
+
+.hide-btn{
+    right:10px;
+}
 .grid-control button.active{
     background:#ff2e63;
 }
