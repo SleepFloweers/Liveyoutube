@@ -2,7 +2,6 @@
 <html lang="id">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Nocturn Noir - Live Streaming</title>
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -423,6 +422,46 @@
     from { transform:rotate(0deg); }
     to { transform:rotate(360deg); }
 }
+.footer-link{
+    cursor:pointer;
+    color:#ff3b3b;
+    transition:0.2s;
+}
+
+.footer-link:hover{
+    opacity:0.8;
+}
+
+.privacy-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:99999;
+}
+
+.privacy-content{
+    background:#111;
+    color:#fff;
+    width:90%;
+    max-width:700px;
+    max-height:80vh;
+    overflow-y:auto;
+    padding:30px;
+    border-radius:15px;
+    position:relative;
+    box-shadow:0 0 30px rgba(0,0,0,0.6);
+}
+
+.close-btn{
+    position:absolute;
+    top:15px;
+    right:20px;
+    cursor:pointer;
+    font-size:18px;
+}
         </style>
     </head>
     <body>
@@ -498,16 +537,82 @@
         <div id="toastContainer"
      style="position:fixed; top:20px; right:20px; z-index:9999;">
 </div>
+<div id="privacyModal" class="privacy-modal">
+    <div class="privacy-content">
+        <span class="close-btn" onclick="closePrivacy()">✖</span>
+
+        <h2>Privacy Policy</h2>
+
+        <p><strong>Website:</strong> https://nn-streaming.vercel.app/</p>
+
+        <p>
+        NN Streaming adalah platform agregator live stream komunitas 
+        <strong>Nocturn Noir</strong>, yang merupakan bagian dari komunitas 
+        server game roleplay <strong>Motionlife Roleplay (IME Roleplay)</strong> 
+        berbasis FiveM pada platform game GTA V.
+        </p>
+
+        <h4>1. Data yang Dikumpulkan</h4>
+        <p>
+        Website ini tidak mengumpulkan data pribadi pengguna secara langsung.
+        Informasi live stream diambil dari publik platform YouTube.
+        </p>
+
+        <h4>2. Cookies</h4>
+        <p>
+        Website ini tidak menggunakan cookies untuk pelacakan pengguna.
+        Namun, embed YouTube dapat menggunakan cookies sesuai kebijakan YouTube.
+        </p>
+
+        <h4>3. Konten Pihak Ketiga</h4>
+        <p>
+        Live stream yang ditampilkan merupakan konten milik masing-masing streamer.
+        Website ini hanya menampilkan embed resmi dari YouTube.
+        </p>
+
+        <h4>4. Penggunaan Website</h4>
+        <p>
+        Website ini dibuat untuk tujuan komunitas dan hiburan.
+        Tidak ada afiliasi resmi dengan Rockstar Games atau GTA V.
+        </p>
+
+        <h4>5. Perubahan Kebijakan</h4>
+        <p>
+        Privacy Policy ini dapat diperbarui sewaktu-waktu tanpa pemberitahuan terlebih dahulu.
+        </p>
+
+        <p style="margin-top:20px; font-size:13px; opacity:0.7;">
+        Last updated: 2026
+        </p>
+
+    </div>
+</div>
         <div class="footer" id="smartFooter">
             check out more at 
             <a href="https://discord.gg/fKzuFn3Aw6" target="_blank">our community</a>. 
             developed by 
             <a href="https://arizu.id" target="_blank">
                 Arizu Studio
-            </a> 
+            </a>.<br/>check our <span onclick="openPrivacy()"><u>Privacy Policy</u></span>
         </div>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+function openPrivacy(){
+    document.getElementById("privacyModal").style.display = "flex";
+}
+
+function closePrivacy(){
+    document.getElementById("privacyModal").style.display = "none";
+}
+
+window.onclick = function(e){
+    const modal = document.getElementById("privacyModal");
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+}
+</script>        
 <script>
     let activeStreams = new Set();
     let currentLimit = 8; // default
