@@ -609,7 +609,7 @@ async function addStreamerToGrid(url, name, button) {
 
     try {
 
-        const res = await fetch("api/check_live?url=" + encodeURIComponent(url));
+        const res = await fetch("https://nn-ytlive.infinityfreeapp.com/check_live.php?url=" + encodeURIComponent(url));
 
         if (!res.ok) {
             throw new Error("HTTP status " + res.status);
@@ -724,7 +724,7 @@ function renderCard(channel) {
 async function checkChannelLive(channel, card) {
 
     try {
-        const res = await fetch("api/check_live?url=" + encodeURIComponent(channel.url));
+        const res = await fetch("https://nn-ytlive.infinityfreeapp.com/check_live.php?url=" + encodeURIComponent(channel.url));
         const status = await res.json();
         if (status.live) {
 
