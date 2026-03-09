@@ -1015,25 +1015,12 @@ async function checkChannelLive(channel, card) {
 }
 function allowCookies(){
 localStorage.setItem("cookieConsent","allow");
-document.getElementById("cookieConsent").style.display="none";
+document.getElementById("cookieConsent").remove();
 }
 
 function declineCookies(){
-localStorage.setItem("cookieConsent","decline");
-window.location.href="https://google.com";
+window.location.href="about:blank";
 }
-
-window.addEventListener("load",function(){
-
-let consent=localStorage.getItem("cookieConsent");
-
-if(!consent){
-document.getElementById("cookieConsent").style.display="block";
-}else{
-document.getElementById("cookieConsent").style.display="none";
-}
-
-});
 loadChannels();
 setGridMode(16);
 </script>
