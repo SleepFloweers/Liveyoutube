@@ -1,14 +1,20 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, OPTIONS");
+    header("Access-Control-Allow-Headers: *");
+    header("Access-Control-Max-Age: 86400");
     http_response_code(200);
     exit();
 }
-function checkLive($channelUrl) {
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Headers: *");
+
+function checkLive($channelUrl){
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $channelUrl);
@@ -21,48 +27,45 @@ function checkLive($channelUrl) {
     $html = curl_exec($ch);
     curl_close($ch);
 
-    if (!$html) return ["live" => false];
+    if(!$html) return ["live"=>false];
 
-    // CEK isLive:true
-    if (strpos($html, '"scheduledStartTime"') !== false) {
+    if(strpos($html,'"scheduledStartTime"') !== false){
+        return ["live"=>false];
+    }
 
-        return ["live" => false];
-    }else
-    if (strpos($html, '"isLive":true') !== false) {
-
-        if (preg_match('/"videoId":"([^"]+)"/', $html, $matches)) {
+    if(strpos($html,'"isLive":true') !== false){
+        if(preg_match('/"videoId":"([^"]+)"/',$html,$m)){
             return [
-                "live" => true,
-                "videoId" => $matches[1]
+                "live"=>true,
+                "videoId"=>$m[1]
             ];
         }
     }
 
-    return ["live" => false];
+    return ["live"=>false];
 }
 
-if (!isset($_GET['url'])) {
-    echo json_encode(["error" => "No URL"]);
+if(!isset($_GET['url'])){
+    echo json_encode(["error"=>"No URL"]);
     exit;
 }
 
 $url = $_GET['url'];
+
 $result = checkLive($url);
 
-header("Content-Type: application/json");
-
-if ($result["live"]) {
+if($result["live"]){
 
     echo json_encode([
-        "live" => true,
-        "embed" => "https://www.youtube.com/embed/" . $result["videoId"],
-        "channel" => str_replace("/live", "", $url)
+        "live"=>true,
+        "embed"=>"https://www.youtube.com/embed/".$result["videoId"],
+        "channel"=>str_replace("/live","",$url)
     ]);
 
-} else {
+}else{
 
     echo json_encode([
-        "live" => false,
-        "channel" => str_replace("/live", "", $url)
+        "live"=>false,
+        "channel"=>str_replace("/live","",$url)
     ]);
 }
