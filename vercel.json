@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://mainnocturnnoir.vercel.app/streaming",
+      "permanent": true
+    }
+  ]
+}
